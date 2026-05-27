@@ -1,0 +1,59 @@
+
+spring:
+  application:
+    name: AviClear
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:aviclear}
+    username: ${POSTGRES_USER:aviclear}
+    password: ${POSTGRES_PASSWORD:aviclear_dev}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  ai:
+    openai:
+      api-key: ${GROQ_API_KEY}
+      base-url: https://api.groq.com/openai
+      chat:
+        options:
+          model: llama-3.3-70b-versatile
+          temperature: 0.2
+
+  rapidapi:
+    key: ${RAPIDAPI_KEY}
+
+  cache:
+    type: simple
+
+server:
+  port: 8080
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+logging:
+  level:
+    com.ark: DEBUG
+    org.springframework.ai: INFO
+    org.springframework.security: INFO
+
+aviclear:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: 86400000 # 24 hours in milliseconds
