@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "/",
+  baseURL: "https://aviclear-production.up.railway.app",
   headers: { "Content-Type": "application/json" },
 });
 
